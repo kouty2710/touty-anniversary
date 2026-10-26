@@ -132,6 +132,14 @@ footer {
   from { opacity: 0; transform: translateY(15px); }
   to { opacity: 1; transform: translateY(0); }
 }
+.subtitle { max-width: 100%; padding: 0 8px; overflow-wrap: anywhere; line-height: 1.7; font-size: clamp(16px, 4.5vw, 20px); }
+.heart { position: fixed; bottom: -50px; color: #ffb6d5; opacity: .7; font-size: 23px; pointer-events: none; animation: floatHeart 14s linear infinite; z-index: 0; }
+@keyframes floatHeart { from { transform: translateY(0); opacity: 0; } 15% { opacity: .7; } to { transform: translateY(-110vh); opacity: 0; } }
+.big-five { z-index: 0; pointer-events: none; }
+main { z-index: 1; min-width: 0; }
+#timer { gap: clamp(5px, 2vw, 12px); max-width: 100%; }
+.unit { min-width: 0; flex: 1; padding: 12px 2px; }
+
 </style>
 </head>
 <body>
@@ -146,9 +154,9 @@ footer {
   <div class="line"></div>
 
   <section id="waiting">
-    <p class="subtitle">كاين تواريخ ماشي مجرد أرقام...</p>
+    <p class="subtitle">Welcome to the sweetest history</p>
     <h1>27</h1>
-    <p class="subtitle">خمس سنين من حكاية بدات في نهار كيما هذا.</p>
+    <p class="subtitle">Welcome to five years with the most wonderful person</p>
     <div id="timer">
       <div class="unit"><span class="number" id="days">00</span><small>DAYS</small></div>
       <div class="unit"><span class="number" id="hours">00</span><small>HOURS</small></div>
@@ -167,7 +175,7 @@ footer {
     <div id="letter" class="hidden"></div>
   </section>
 
-  <footer>MADE WITH MEANING · 27</footer>
+  <footer>From kouty to touty ❤️</footer>
 </main>
 
 <script>
