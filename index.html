@@ -1,0 +1,214 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080808">
+<title>27 — Our Story</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cormorant+Garamond:wght@400;500;600&display=swap');
+
+:root {
+  --gold: #d8b778;
+  --dark: #080808;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse at 50% 40%, #302315 0%, #11100d 35%, #080808 75%);
+  color: #f4ead9;
+  font-family: 'Amiri', serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-x: hidden;
+}
+.stars {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(1px 1px at 15% 20%, #e7cf9b 98%, transparent),
+    radial-gradient(1px 1px at 75% 15%, #e7cf9b 98%, transparent),
+    radial-gradient(2px 2px at 80% 65%, #b99a60 98%, transparent),
+    radial-gradient(1px 1px at 25% 75%, #e7cf9b 98%, transparent),
+    radial-gradient(1px 1px at 60% 85%, #e7cf9b 98%, transparent);
+  opacity: .65;
+}
+main {
+  width: min(90%, 480px);
+  text-align: center;
+  padding: 45px 20px;
+  position: relative;
+}
+.eyebrow {
+  font-family: 'Cormorant Garamond', serif;
+  color: var(--gold);
+  letter-spacing: 5px;
+  font-size: 13px;
+  direction: ltr;
+}
+.line {
+  width: 65px;
+  height: 1px;
+  background: var(--gold);
+  margin: 24px auto;
+  opacity: .7;
+}
+h1 {
+  font-family: 'Cormorant Garamond', serif;
+  color: var(--gold);
+  font-size: clamp(76px, 22vw, 112px);
+  line-height: 1;
+  font-weight: 400;
+  margin: 15px 0;
+  direction: ltr;
+  text-shadow: 0 0 35px #d8b77822;
+}
+.subtitle {
+  font-size: 19px;
+  line-height: 2;
+  color: #d7cbbb;
+}
+#timer {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  direction: ltr;
+  margin: 30px 0;
+}
+.unit {
+  min-width: 58px;
+  padding: 12px 4px;
+  border: 1px solid #d8b77835;
+  background: #ffffff04;
+}
+.number {
+  font: 29px 'Cormorant Garamond', serif;
+  color: var(--gold);
+  display: block;
+}
+.unit small {
+  color: #a99b85;
+  font-size: 10px;
+}
+button {
+  color: var(--gold);
+  border: 1px solid #d8b77885;
+  background: #d8b7780a;
+  padding: 13px 28px;
+  font: 17px 'Amiri', serif;
+  cursor: pointer;
+  transition: .3s;
+}
+button:active { background: #d8b77825; }
+.hidden { display: none !important; }
+#letter {
+  margin-top: 28px;
+  padding: 25px 18px;
+  border: 1px solid #d8b77845;
+  background: #0a0907c9;
+  line-height: 2.2;
+  font-size: 19px;
+  white-space: pre-wrap;
+  text-align: right;
+  animation: appear 1.5s ease both;
+}
+.signature {
+  color: var(--gold);
+  margin-top: 25px;
+}
+footer {
+  color: #8d806e;
+  font: 12px 'Cormorant Garamond', serif;
+  margin-top: 38px;
+  direction: ltr;
+  letter-spacing: 2px;
+}
+@keyframes appear {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+</style>
+</head>
+<body>
+<div class="stars"></div>
+<main>
+  <div class="eyebrow">A STORY WRITTEN IN TIME</div>
+  <div class="line"></div>
+
+  <section id="waiting">
+    <p class="subtitle">كاين تواريخ ماشي مجرد أرقام...</p>
+    <h1>27</h1>
+    <p class="subtitle">خمس سنين من حكاية بدات في نهار كيما هذا.</p>
+    <div id="timer">
+      <div class="unit"><span class="number" id="days">00</span><small>DAYS</small></div>
+      <div class="unit"><span class="number" id="hours">00</span><small>HOURS</small></div>
+      <div class="unit"><span class="number" id="minutes">00</span><small>MINUTES</small></div>
+      <div class="unit"><span class="number" id="seconds">00</span><small>SECONDS</small></div>
+    </div>
+    <p class="eyebrow">27 OCTOBER 2026 · 00:00</p>
+  </section>
+
+  <section id="revealed" class="hidden">
+    <p class="eyebrow">OCTOBER 27, 2026</p>
+    <h1 style="font-size:65px">For Touty</h1>
+    <div class="line"></div>
+    <p class="subtitle">خمس سنين... ومازال عندي كلام ليك.</p>
+    <button id="openLetter">افتحي رسالتك الخاصة ♡</button>
+    <div id="letter" class="hidden"></div>
+  </section>
+
+  <footer>MADE WITH MEANING · 27</footer>
+</main>
+
+<script>
+const target = Date.UTC(2026, 9, 26, 23, 0, 0);
+
+// ضع رسالتك النهائية هنا لاحقاً دون تغيير باقي الكود.
+const message = `إلى توتي،
+
+هنا راح تكون رسالتك الخاصة...
+    
+كل عام وحكايتنا عندها ذكرى.
+
+— إسلام`;
+
+const waiting = document.getElementById('waiting');
+const revealed = document.getElementById('revealed');
+
+function update() {
+  const remaining = target - Date.now();
+
+  if (remaining <= 0) {
+    waiting.classList.add('hidden');
+    revealed.classList.remove('hidden');
+    return;
+  }
+
+  document.getElementById('days').textContent =
+    String(Math.floor(remaining / 86400000)).padStart(2, '0');
+  document.getElementById('hours').textContent =
+    String(Math.floor(remaining / 3600000) % 24).padStart(2, '0');
+  document.getElementById('minutes').textContent =
+    String(Math.floor(remaining / 60000) % 60).padStart(2, '0');
+  document.getElementById('seconds').textContent =
+    String(Math.floor(remaining / 1000) % 60).padStart(2, '0');
+}
+
+document.getElementById('openLetter').addEventListener('click', () => {
+  const letter = document.getElementById('letter');
+  letter.textContent = message;
+  letter.classList.remove('hidden');
+  document.getElementById('openLetter').classList.add('hidden');
+});
+
+update();
+setInterval(update, 1000);
+</script>
+</body>
+</html>
+
