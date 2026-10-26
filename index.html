@@ -10,7 +10,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cormorant+Garamond:wght@400;500;600&display=swap');
 
 :root {
-  --gold: #d8b778;
+  --gold: #ffb6d5;
   --dark: #080808;
 }
 * { box-sizing: border-box; }
@@ -18,8 +18,8 @@ body {
   margin: 0;
   min-height: 100vh;
   background:
-    radial-gradient(ellipse at 50% 40%, #302315 0%, #11100d 35%, #080808 75%);
-  color: #f4ead9;
+    radial-gradient(ellipse at 50% 40%, #8b315f 0%, #4b1b3a 42%, #200c1c 100%);
+  color: #fff0f7;
   font-family: 'Amiri', serif;
   display: flex;
   align-items: center;
@@ -31,11 +31,11 @@ body {
   inset: 0;
   pointer-events: none;
   background-image:
-    radial-gradient(1px 1px at 15% 20%, #e7cf9b 98%, transparent),
-    radial-gradient(1px 1px at 75% 15%, #e7cf9b 98%, transparent),
-    radial-gradient(2px 2px at 80% 65%, #b99a60 98%, transparent),
-    radial-gradient(1px 1px at 25% 75%, #e7cf9b 98%, transparent),
-    radial-gradient(1px 1px at 60% 85%, #e7cf9b 98%, transparent);
+    radial-gradient(1px 1px at 15% 20%, #ffc9e2 98%, transparent),
+    radial-gradient(1px 1px at 75% 15%, #ffc9e2 98%, transparent),
+    radial-gradient(2px 2px at 80% 65%, #ff8fc5 98%, transparent),
+    radial-gradient(1px 1px at 25% 75%, #ffc9e2 98%, transparent),
+    radial-gradient(1px 1px at 60% 85%, #ffc9e2 98%, transparent);
   opacity: .65;
 }
 main {
@@ -71,7 +71,7 @@ h1 {
 .subtitle {
   font-size: 19px;
   line-height: 2;
-  color: #d7cbbb;
+  color: #ffe0ef;
 }
 #timer {
   display: flex;
@@ -136,8 +136,13 @@ footer {
 </head>
 <body>
 <div class="stars"></div>
+<div class="big-five">5</div>
+<div class="heart" style="left:10%;animation-delay:0s">♡</div>
+<div class="heart" style="left:30%;animation-delay:3s">♥</div>
+<div class="heart" style="left:70%;animation-delay:1s">♡</div>
+<div class="heart" style="left:90%;animation-delay:5s">♥</div>
 <main>
-  <div class="eyebrow">A STORY WRITTEN IN TIME</div>
+  <div class="eyebrow">♡ HELLO, 5 YEARS ♡</div><div class="eyebrow" style="margin-top:10px">A STORY WRITTEN IN TIME</div>
   <div class="line"></div>
 
   <section id="waiting">
