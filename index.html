@@ -140,6 +140,7 @@ main { z-index: 1; min-width: 0; }
 #timer { gap: clamp(5px, 2vw, 12px); max-width: 100%; }
 .unit { min-width: 0; flex: 1; padding: 12px 2px; }
 
+#surpriseBtn:disabled{opacity:.5;cursor:not-allowed}#surpriseBtn{margin-top:12px;border-radius:999px;padding:14px 22px;background:#ffb6d51a}#passwordPage,#letterPage{animation:appear 1s ease both}#pinInput:focus{outline:2px solid #ffb6d5}@media(max-width:380px){main{padding:28px 12px}#timer{gap:5px}.unit{padding:10px 1px}.number{font-size:25px}}
 </style>
 </head>
 <body>
@@ -164,34 +165,68 @@ main { z-index: 1; min-width: 0; }
       <div class="unit"><span class="number" id="seconds">00</span><small>SECONDS</small></div>
     </div>
     <p class="eyebrow">27 OCTOBER 2026 · 00:00</p>
+    <button id="surpriseBtn" disabled>🔒 Open Your Surprise ♡</button>
   </section>
 
   <section id="revealed" class="hidden">
     <p class="eyebrow">OCTOBER 27, 2026</p>
-    <h1 style="font-size:65px">For Touty</h1>
+    <h1 style="font-size:55px">For Touty ♡</h1>
     <div class="line"></div>
-    <p class="subtitle">خمس سنين... ومازال عندي كلام ليك.</p>
-    <button id="openLetter">افتحي رسالتك الخاصة ♡</button>
-    <div id="letter" class="hidden"></div>
+    <p class="subtitle">Your little surprise is finally here.</p>
+    <button id="openSurprise">Open Your Surprise ♡</button>
   </section>
+
+  <section id="passwordPage" class="hidden">
+    <p class="eyebrow">JUST FOR YOU ♡</p>
+    <h1 style="font-size:42px">A Little Secret</h1>
+    <p class="subtitle">Enter our four-digit code</p>
+    <div id="pinDots" style="font-size:28px;letter-spacing:8px;margin:20px;color:#ffb6d5">○ ○ ○ ○</div>
+    <input id="pinInput" type="password" inputmode="numeric" maxlength="4" placeholder="••••" aria-label="Four digit code" style="box-sizing:border-box;width:180px;max-width:100%;padding:14px;border:1px solid #ffb6d5;border-radius:14px;background:#321326;color:#fff0f7;text-align:center;font-size:24px;letter-spacing:8px">
+    <p id="pinError" style="min-height:24px;color:#ffd0e5"></p>
+    <button id="unlockBtn">Unlock our story ♡</button>
+  </section>
+
+  <section id="letterPage" class="hidden">
+    <p class="eyebrow">♡ HAPPY FIVE YEARS ♡</p>
+    <h1 style="font-size:38px">إلى توتي، حكاية قلبي</h1>
+    <p class="subtitle">خمس سنين من الحكاية… ومازال الأجمل قدّامنا ❤️</p>
+    <div class="line"></div>
+    <div style="padding:22px 18px;border:1px solid #ffb6d566;border-radius:20px;background:#321326d9;line-height:2.1;font-size:18px;text-align:right;white-space:pre-line">
+توتي تاعي،
+
+إذا كان كاين نهار يستاهل نوقف فيه الوقت ونرجع نتفكّر كل التفاصيل الحلوة، فهو نهار بدات فيه حكايتنا.
+
+خمس سنين دازوا، وفيهم ذكريات وضحكات وأيام صعيبة حتى هي علّمتنا بزاف. بصح الحاجة اللي نحبها هي أنو كل عام عندو حكاية، وكل ذكرى عندها بلاصتها في قلبي.
+
+نتمنالك من قلبي أيام مليانة راحة وفرحة ونجاحات، ونشوفك ديما تحققي الأحلام اللي راكي تتمني فيهم. تستاهلي كل حاجة جميلة في هذي الدنيا.
+
+وهذي الصفحة الصغيرة ما هي إلا ذكرى بسيطة حبيت نخليها ليك، باش كل ما ترجعي ليها تتفكري بلي كاين حكاية بدات من خمس سنين، وما زال عندها صفحات جديدة تستنى تتكتب.
+
+كل عام وحكايتنا بخير يا توتي ♡
+
+<div style="text-align:center;color:#ffc5df;margin-top:20px">From Kouty to Touty ❤️</div>
+    </div>
+  </section>
+
 
   <footer>From kouty to touty ❤️</footer>
 </main>
 
 <script>
 const target = Date.UTC(2026, 9, 26, 23, 0, 0);
-
-// ضع رسالتك النهائية هنا لاحقاً دون تغيير باقي الكود.
-const message = `إلى توتي،
-
-هنا راح تكون رسالتك الخاصة...
-    
-كل عام وحكايتنا عندها ذكرى.
-
-— إسلام`;
-
 const waiting = document.getElementById('waiting');
 const revealed = document.getElementById('revealed');
+const surpriseBtn = document.getElementById('surpriseBtn');
+const passwordPage = document.getElementById('passwordPage');
+const letterPage = document.getElementById('letterPage');
+const pinInput = document.getElementById('pinInput');
+const pinDots = document.getElementById('pinDots');
+const pinError = document.getElementById('pinError');
+
+function showOnly(page) {
+  [waiting, revealed, passwordPage, letterPage].forEach(el => el.classList.add('hidden'));
+  page.classList.remove('hidden');
+}
 
 function update() {
   const remaining = target - Date.now();
@@ -199,6 +234,8 @@ function update() {
   if (remaining <= 0) {
     waiting.classList.add('hidden');
     revealed.classList.remove('hidden');
+    surpriseBtn.disabled = false;
+    surpriseBtn.textContent = '♡ Open Your Surprise ♡';
     return;
   }
 
@@ -212,15 +249,35 @@ function update() {
     String(Math.floor(remaining / 1000) % 60).padStart(2, '0');
 }
 
-document.getElementById('openLetter').addEventListener('click', () => {
-  const letter = document.getElementById('letter');
-  letter.textContent = message;
-  letter.classList.remove('hidden');
-  document.getElementById('openLetter').classList.add('hidden');
+document.getElementById('openSurprise').addEventListener('click', () => {
+  if (Date.now() >= target) showOnly(passwordPage);
+});
+
+pinInput.addEventListener('input', () => {
+  pinInput.value = pinInput.value.replace(/[^0-9]/g, '').slice(0, 4);
+  pinDots.textContent = pinInput.value.padEnd(4, '○').split('').join(' ');
+  pinError.textContent = '';
+});
+
+function unlock() {
+  if (Date.now() < target) return;
+  if (pinInput.value === '2710') {
+    showOnly(letterPage);
+  } else {
+    pinError.textContent = 'Wrong code. Try again ♡';
+    pinInput.value = '';
+    pinDots.textContent = '○ ○ ○ ○';
+  }
+}
+
+document.getElementById('unlockBtn').addEventListener('click', unlock);
+pinInput.addEventListener('keydown', event => {
+  if (event.key === 'Enter') unlock();
 });
 
 update();
 setInterval(update, 1000);
+
 </script>
 </body>
 </html>
